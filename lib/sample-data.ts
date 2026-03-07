@@ -74,42 +74,60 @@ export const sampleSkills: Skill[] = [
 
 export const sampleProjects: Project[] = [
   {
-    _id: "proj-1",
-    title: "ShipFast — SaaS Boilerplate",
+    id: 1,
+    userId: 1,
+    title: "Health Monitoring System",
     description:
-      "A production-ready SaaS starter kit with authentication, Stripe billing, team management, and an admin dashboard. Built to help founders launch faster.",
-    technologies: ["Next.js", "TypeScript", "Prisma", "Stripe", "Tailwind CSS"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
+      "A real-time health monitoring platform with guest statistics, automated alerts, and data seeding — built with the MERN stack.",
+    longDescription:
+      "A comprehensive real-time health monitoring platform featuring:\n\n• Centralized auto-refresh system using Redux for page-specific refresh callbacks with pause/resume controls.\n• Real-time guest statistics computing total guests, healthy guests, needs-attention cases, and average health scores with threshold-based categorization.\n• Automated data seeding system that progressively creates users, assigns tracking devices, monitors metrics, and simulates activity sessions.\n• Centralized alerts and notifications system with severity levels, 3 status states, team assignment tracking, multi-recipient support, and read/unread tracking.\n• Color-coded visual health indicators for instant decision-making and prioritization of at-risk guests.",
+    techStack: ["React.js", "Node.js", "Express.js", "MongoDB", "Redux", "Chart.js"],
     featured: true,
+    order: 1,
+    createdAt: "2026-03-07T20:49:29.000Z",
+    updatedAt: "2026-03-07T20:49:29.000Z",
   },
   {
-    _id: "proj-2",
-    title: "MediTrack — Patient Portal",
+    id: 2,
+    userId: 1,
+    title: "Solar Asset Management Platform",
     description:
-      "A HIPAA-compliant patient management system with appointment scheduling, medical records, and real-time chat between doctors and patients.",
-    technologies: ["React", "Node.js", "PostgreSQL", "Socket.io", "AWS"],
-    liveUrl: "https://example.com",
+      "Enterprise solar energy management platform with custom dashboards, i18n support, and real-time monitoring serving 2000+ B2B clients.",
+    longDescription:
+      "An enterprise-grade solar asset management platform built at Quadrical AI:\n\n• Custom Dashboard builder using schema-driven, widget-based architecture adopted by 2000+ B2B clients.\n• Platform-wide i18n translation system with locale-driven routing and dynamic dictionary loading.\n• Centralized auto-refresh system for real-time data accuracy across all platform pages.\n• Optimized Next.js backend with restructured API routes for significantly faster response times.",
+    techStack: ["Next.js", "React.js", "Redux", "Node.js", "REST APIs"],
     featured: true,
+    order: 2,
+    createdAt: "2026-03-07T20:50:03.000Z",
+    updatedAt: "2026-03-07T20:50:03.000Z",
   },
   {
-    _id: "proj-3",
-    title: "CartFlow — E-commerce Platform",
+    id: 3,
+    userId: 1,
+    title: "Manufacturing Traceability System",
     description:
-      "A headless e-commerce storefront with sub-second page loads, dynamic product filtering, and a seamless checkout experience processing $200K+ in monthly transactions.",
-    technologies: ["Next.js", "Shopify API", "Tailwind CSS", "Vercel"],
-    liveUrl: "https://example.com",
-    githubUrl: "https://github.com",
+      "End-to-end traceability system for manufacturing with raw material verification, workflow enforcement, and 40+ automated validations.",
+    longDescription:
+      "A full-stack traceability system built at Techpearl for manufacturing operations:\n\n• Dynamic, schema-driven configuration for products, processes, and parameters — eliminating rigid system dependencies.\n• Machine-line raw material verification with sequential workflow enforcement and parallel processing logic.\n• 40+ automated error-code validations with employee authentication for highly accurate production tracking.\n• Comprehensive analytics with drill-down dashboards covering raw material flow, process checkpoints, and machine error codes.\n• Designed both high-level and low-level system architecture end-to-end.",
+    techStack: ["React.js", "Node.js", "Express.js", "MongoDB", "ECharts"],
     featured: true,
+    order: 3,
+    createdAt: "2026-03-07T20:51:18.000Z",
+    updatedAt: "2026-03-07T20:51:18.000Z",
   },
   {
-    _id: "proj-4",
-    title: "InsightBoard — Analytics Dashboard",
+    id: 4,
+    userId: 1,
+    title: "Store And Forward Microservice",
     description:
-      "A real-time analytics dashboard with interactive charts, custom report builder, and automated email digests for key business metrics.",
-    technologies: ["React", "D3.js", "Express.js", "MongoDB", "Redis"],
-    githubUrl: "https://github.com",
+      "High-reliability data forwarding microservice handling millions of records with queued batch processing and zero data leakage.",
+    longDescription:
+      "A backend microservice built at Myweblink Technologies for IoT data pipelines:\n\n• Data-processing algorithm that validates, sequences, and stores incoming packets with zero data loss.\n• High-reliability forwarding engine handling millions of records at configured intervals.\n• Queued batch processing with retry logic and integrity checks ensuring consistent delivery.\n• Zero data leakage architecture designed for mission-critical IoT deployments.",
+    techStack: ["Node.js", "Express.js", "MySQL"],
     featured: false,
+    order: 4,
+    createdAt: "2026-03-07T20:51:36.000Z",
+    updatedAt: "2026-03-07T20:51:36.000Z",
   },
 ];
 

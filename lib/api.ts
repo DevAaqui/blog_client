@@ -1,4 +1,11 @@
-import type { Profile, Experience, Education, Skill, Project, Blog } from "./types";
+import type {
+  Profile,
+  Experience,
+  Education,
+  Skill,
+  Project,
+  Blog,
+} from "./types";
 import {
   sampleProfile,
   sampleExperiences,
@@ -9,7 +16,7 @@ import {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-async function fetcher<T>(endpoint: string, revalidate = 3600): Promise<T> {
+async function fetcher<T>(endpoint: string, revalidate = 0): Promise<T> {
   const res = await fetch(`${API_URL}${endpoint}`, {
     next: { revalidate },
   });
@@ -31,8 +38,11 @@ export async function getProfile(): Promise<Profile> {
 
 export async function getExperiences(): Promise<Experience[]> {
   try {
-    const data = await fetcher<Experience[]>("/api/experiences");
-    return data.length > 0 ? data : sampleExperiences;
+    const data = await fetcher<{ data: { experiences: Experience[] } }>(
+      "/api/experiences",
+    );
+    let experiences = data?.data?.experiences; // Handle both { data: { experiences: [...] } } and direct array
+    return experiences?.length > 0 ? experiences : sampleExperiences;
   } catch {
     return sampleExperiences;
   }
@@ -48,8 +58,9 @@ export async function getEducations(): Promise<Education[]> {
 
 export async function getSkills(): Promise<Skill[]> {
   try {
-    const data = await fetcher<Skill[]>("/api/skills");
-    return data.length > 0 ? data : sampleSkills;
+    const data = await fetcher<{ data: { skills: Skill[] } }>("/api/skills");
+    const skills = data.data?.skills || [];
+    return skills.length > 0 ? skills : sampleSkills;
   } catch {
     return sampleSkills;
   }
@@ -57,8 +68,10 @@ export async function getSkills(): Promise<Skill[]> {
 
 export async function getProjects(): Promise<Project[]> {
   try {
-    const data = await fetcher<Project[]>("/api/projects");
-    return data.length > 0 ? data : sampleProjects;
+    const data = await fetcher<{ data: { projects: Project[] } }>("/api/projects");
+    // console.log('data from projects API>>>>>>', data);
+    let projects = data?.data?.projects; // Handle both { data: { projects: [...] } } and direct array
+    return projects?.length > 0 ? projects : sampleProjects;
   } catch {
     return sampleProjects;
   }

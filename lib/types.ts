@@ -50,14 +50,19 @@ export interface Skill {
 }
 
 export interface Project {
-  _id: string;
+  id: number;
+  userId: number;
   title: string;
   description: string;
-  image?: string;
-  technologies: string[];
+  longDescription?: string;
+  thumbnail?: string;
   liveUrl?: string;
   githubUrl?: string;
+  techStack: string[];
   featured?: boolean;
+  order: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Blog {

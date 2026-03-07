@@ -11,6 +11,7 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+  console.log("Projects in ProjectsSection>>>>>>", projects);
 
   return (
     <section id="projects" className="py-24 sm:py-32">
@@ -32,20 +33,20 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
         <div className="grid md:grid-cols-2 gap-6">
           {projects.map((project, i) => (
             <motion.div
-              key={project._id}
+              key={project.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
               <Card className="bg-zinc-900/50 border border-zinc-800/50 shadow-none hover:border-zinc-700/80 transition-colors group h-full">
-                {project.image && (
+                {project.thumbnail && (
                   <div className="relative w-full aspect-video overflow-hidden">
                     <Image
                       src={
-                        project.image.startsWith("http")
-                          ? project.image
-                          : `${apiUrl}${project.image}`
+                        project.thumbnail.startsWith("http")
+                          ? project.thumbnail
+                          : `${apiUrl}${project.thumbnail}`
                       }
                       alt={project.title}
                       fill
@@ -62,7 +63,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((tech) => (
+                    {project.techStack.map((tech) => (
                       <Chip
                         key={tech}
                         size="sm"
