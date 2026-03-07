@@ -14,10 +14,10 @@ import {
 import { useState } from "react";
 
 const navItems = [
-  { label: "About", href: "#about" },
-  { label: "Experience", href: "#experience" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
+  { label: "About", href: "/#about" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Projects", href: "/#projects" },
   { label: "Blog", href: "/blog" },
 ];
 
@@ -64,10 +64,10 @@ export function SiteNavbar() {
         <NavbarItem>
           <Button
             as={Link}
-            href="#contact"
+            href="/#contact"
             size="sm"
             radius="full"
-            className="bg-white text-black font-semibold hover:bg-zinc-200"
+            className="bg-white text-black font-semibold hover:bg-zinc-200 px-2 py-1"
           >
             Hire Me
           </Button>
