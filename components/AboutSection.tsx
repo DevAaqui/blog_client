@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar } from "@heroui/react";
+import { Avatar, Accordion, AccordionItem } from "@heroui/react";
 import { motion } from "framer-motion";
 import type { Profile } from "@/lib/types";
 
@@ -59,20 +59,58 @@ export function AboutSection({ profile }: AboutSectionProps) {
               {profile.bio}
             </p>
 
+            {profile.aboutMe && (
+              <div className="mt-6">
+                <Accordion>
+                  <AccordionItem
+                    key="about-me"
+                    title="More about me"
+                    textValue="More about me"
+                  >
+                    {profile.aboutMe}
+                  </AccordionItem>
+                </Accordion>
+              </div>
+            )}
+
             <div className="flex flex-wrap gap-x-6 gap-y-3 mt-8 text-sm text-zinc-500">
               {profile.location && (
                 <span className="flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
                   </svg>
                   {profile.location}
                 </span>
               )}
               {profile.email && (
                 <span className="flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  <svg
+                    className="w-4 h-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
                   </svg>
                   {profile.email}
                 </span>

@@ -30,7 +30,11 @@ async function fetcher<T>(endpoint: string, revalidate = 0): Promise<T> {
 
 export async function getProfile(): Promise<Profile> {
   try {
-    return await fetcher<Profile>("/api/profile");
+    const data = await fetcher<{data: { profile: Profile }}>("/api/profile");
+    let profile = data.data.profile; // Handle both { data: { ... } } and direct object
+
+    return profile 
+    
   } catch {
     return sampleProfile;
   }

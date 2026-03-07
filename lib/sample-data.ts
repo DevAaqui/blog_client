@@ -5,6 +5,7 @@ export const sampleProfile: Profile = {
   name: "Aaquib",
   title: "Full-Stack Developer & Freelancer",
   bio: "I'm a passionate full-stack developer with 4+ years of experience building web applications that solve real business problems. I specialize in React, Node.js, and cloud-native architectures.\n\nI've helped startups and businesses ship products used by thousands of users — from SaaS platforms and e-commerce stores to content management systems and real-time dashboards. I care deeply about clean code, great UX, and delivering on time.",
+  aboutMe: "I am a seasoned MERN Stack Developer with 4+ years of professional experience building enterprise-grade web applications. I have worked across solar energy platforms, manufacturing traceability systems, and IoT data pipelines. My expertise spans React, Next.js, React Native, Node.js, Express, MySQL, and MongoDB. I thrive on architecting scalable systems — from custom dashboard builders serving 2000+ B2B clients to real-time data forwarding microservices handling millions of records. Currently open to freelance projects — let us build something great together.",
   email: "hello@aaquib.dev",
   location: "Available Worldwide (Remote)",
   website: "https://aaquib.dev",

@@ -11,7 +11,6 @@ interface ProjectsSectionProps {
 
 export function ProjectsSection({ projects }: ProjectsSectionProps) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-  console.log("Projects in ProjectsSection>>>>>>", projects);
 
   return (
     <section id="projects" className="py-24 sm:py-32">

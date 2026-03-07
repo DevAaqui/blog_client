@@ -3,6 +3,7 @@ export interface Profile {
   name: string;
   title: string;
   bio: string;
+  aboutMe?: string;
   email: string;
   phone?: string;
   location?: string;
