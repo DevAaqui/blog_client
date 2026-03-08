@@ -28,7 +28,7 @@ export function AboutSection({ profile }: AboutSectionProps) {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-[auto_1fr] gap-12 items-start">
+        <div className="grid md:grid-cols-[auto_1fr] gap-8 sm:gap-12 items-start">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -55,7 +55,7 @@ export function AboutSection({ profile }: AboutSectionProps) {
               {profile.name}
             </h3>
             <p className="text-blue-400 font-medium mb-4">{profile.title}</p>
-            <p className="text-zinc-400 leading-relaxed text-lg whitespace-pre-line">
+            <p className="text-zinc-400 leading-relaxed text-base sm:text-lg whitespace-pre-line">
               {profile.bio}
             </p>
 

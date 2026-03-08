@@ -46,10 +46,10 @@ export function Footer({ profile }: FooterProps) {
           <p className="text-sm font-semibold tracking-widest text-blue-400 uppercase mb-3">
             Get in Touch
           </p>
-          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-6">
             Let&apos;s build something great
           </h2>
-          <p className="text-lg text-zinc-400 max-w-xl mx-auto mb-8">
+          <p className="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto mb-8 px-2 sm:px-0">
             Have a project in mind? I&apos;d love to hear about it. Drop me a
             message and let&apos;s discuss how I can help bring your vision to
             life.

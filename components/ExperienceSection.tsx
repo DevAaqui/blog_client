@@ -44,7 +44,7 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
           <div className="space-y-8">
             {sorted.map((exp, i) => (
               <motion.div
-                key={exp._id}
+                key={exp._id ?? `exp-${i}`}
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
@@ -55,7 +55,7 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                 <div className="absolute left-3 top-6 w-2.5 h-2.5 rounded-full bg-blue-500 ring-4 ring-black hidden md:block" />
 
                 <Card className="bg-zinc-900/50 border border-zinc-800/50 shadow-none">
-                  <CardBody className="p-6">
+                  <CardBody className="p-4 sm:p-6">
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                       <div>
                         <h3 className="text-lg font-semibold text-white">

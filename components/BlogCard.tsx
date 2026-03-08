@@ -51,9 +51,9 @@ export function BlogCard({ blog, index = 0 }: BlogCardProps) {
               />
             </div>
           )}
-          <CardBody className="p-6">
-            <div className="flex items-center gap-3 mb-2">
-              <p className="text-sm text-zinc-500">
+          <CardBody className="p-4 sm:p-6">
+            <div className="flex items-center gap-2 sm:gap-3 mb-2 flex-wrap">
+              <p className="text-xs sm:text-sm text-zinc-500">
                 {formatDate(blog.publishedAt || blog.createdAt)}
               </p>
               {blog.category && categoryLabels[blog.category] && (
@@ -62,7 +62,7 @@ export function BlogCard({ blog, index = 0 }: BlogCardProps) {
                 </span>
               )}
             </div>
-            <h3 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors mb-2 line-clamp-2">
+            <h3 className="text-base sm:text-lg font-semibold text-white group-hover:text-blue-400 transition-colors mb-2 line-clamp-2">
               {blog.title}
             </h3>
             {blog.excerpt && (

@@ -25,12 +25,13 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen bg-black antialiased">
+      <body className="min-h-screen bg-black antialiased overflow-x-hidden">
         <Providers>
           <SiteNavbar />
           <main>{children}</main>

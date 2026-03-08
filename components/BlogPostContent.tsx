@@ -21,14 +21,14 @@ export function BlogPostContent({ blog }: BlogPostContentProps) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   return (
-    <article className="py-10 sm:py-10 min-h-screen">
-      <div className="max-w-7xl mx-auto px-0">
+    <article className="py-8 sm:py-10 min-h-screen">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <Button
           as={Link}
           href="/blog"
           variant="light"
           radius="full"
-          className="text-zinc-400 hover:text-white mb-8 -ml-4"
+          className="text-zinc-400 hover:text-white mb-6 sm:mb-8 -ml-2 sm:-ml-4"
           startContent={
             <svg
               className="w-4 h-4"
@@ -52,7 +52,7 @@ export function BlogPostContent({ blog }: BlogPostContentProps) {
           <p className="text-sm text-zinc-500 mb-4">
             {formatDate(blog.publishedAt || blog.createdAt)}
           </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 sm:mb-6">
             {blog.title}
           </h1>
           {blog.tags && blog.tags.length > 0 && (
@@ -75,7 +75,7 @@ export function BlogPostContent({ blog }: BlogPostContentProps) {
         </header>
 
         {blog.coverImage && (
-          <div className="relative w-full aspect-[16/9] rounded-2xl overflow-hidden mb-12">
+          <div className="relative w-full aspect-[16/9] rounded-xl sm:rounded-2xl overflow-hidden mb-8 sm:mb-12">
             <Image
               src={
                 blog.coverImage.startsWith("http")

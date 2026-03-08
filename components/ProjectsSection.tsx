@@ -54,11 +54,11 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-900/60 to-transparent" />
                   </div>
                 )}
-                <CardBody className="p-6">
-                  <h3 className="text-xl font-semibold text-white mb-2">
+                <CardBody className="p-4 sm:p-6">
+                  <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-zinc-400 leading-relaxed mb-4">
+                  <p className="text-sm sm:text-base text-zinc-400 leading-relaxed mb-4">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -77,7 +77,7 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
                     ))}
                   </div>
                 </CardBody>
-                <CardFooter className="px-6 pb-6 pt-0 gap-3">
+                <CardFooter className="px-4 sm:px-6 pb-4 sm:pb-6 pt-0 gap-3 flex-wrap">
                   {project.liveUrl && (
                     <Button
                       as={Link}

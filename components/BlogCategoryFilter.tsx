@@ -35,9 +35,9 @@ export function BlogCategoryFilter({ blogs }: BlogCategoryFilterProps) {
         onSelectionChange={(key) => setSelected(key as string)}
         variant="underlined"
         classNames={{
-          base: "mb-4",
-          tabList: "gap-6 border-b border-zinc-800 pb-0",
-          tab: "px-0 h-10 text-sm",
+          base: "mb-4 w-full overflow-x-auto",
+          tabList: "gap-3 sm:gap-6 border-b border-zinc-800 pb-0 flex-nowrap min-w-max sm:min-w-0",
+          tab: "px-0 h-10 text-xs sm:text-sm whitespace-nowrap",
           cursor: "bg-blue-500",
           tabContent: "text-zinc-500 group-data-[selected=true]:text-white font-medium",
         }}
