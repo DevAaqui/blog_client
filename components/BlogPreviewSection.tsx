@@ -10,6 +10,7 @@ interface BlogPreviewSectionProps {
 }
 
 export function BlogPreviewSection({ blogs }: BlogPreviewSectionProps) {
+  console.log('blogs from blog preview section>>>>>>', blogs);
   const latest = blogs.slice(0, 3);
 
   if (latest.length === 0) return null;
@@ -45,7 +46,7 @@ export function BlogPreviewSection({ blogs }: BlogPreviewSectionProps) {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {latest.map((blog, i) => (
-            <BlogCard key={blog._id} blog={blog} index={i} />
+            <BlogCard key={blog.id} blog={blog} index={i} />
           ))}
         </div>
       </div>

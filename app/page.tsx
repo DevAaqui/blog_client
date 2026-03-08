@@ -16,7 +16,7 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const [profile, experiences, skills, projects, blogs] = await Promise.all([
+  const [profile, experiences, skills, projects, blogData] = await Promise.all([
     getProfile(),
     getExperiences(),
     getSkills(),
@@ -31,7 +31,7 @@ export default async function HomePage() {
       <ExperienceSection experiences={experiences} />
       <SkillsSection skills={skills} />
       <ProjectsSection projects={projects} />
-      <BlogPreviewSection blogs={blogs} />
+      <BlogPreviewSection blogs={blogData.blogs} />
       <Footer profile={profile} />
     </>
   );

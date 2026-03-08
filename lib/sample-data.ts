@@ -135,7 +135,8 @@ export const sampleProjects: Project[] = [
 export const sampleBlogs: Blog[] = [
   // ── Case Studies ──
   {
-    _id: "blog-cs-1",
+    id: 1,
+    userId: 1,
     title: "How We Built a Multi-Tenant SaaS Platform Serving 5,000+ Users",
     slug: "multi-tenant-saas-platform-case-study",
     excerpt:
@@ -164,13 +165,14 @@ async function tenantMiddleware(req, res, next) {
 
 <blockquote>Multi-tenancy isn't just a database decision — it touches auth, billing, caching, and even your error monitoring strategy.</blockquote>`,
     tags: ["Case Study", "SaaS", "Architecture"],
-    published: true,
+    status: "published",
     publishedAt: "2026-02-20T10:00:00Z",
     createdAt: "2026-02-20T10:00:00Z",
     updatedAt: "2026-02-20T10:00:00Z",
   },
   {
-    _id: "blog-cs-2",
+    id: 2,
+    userId: 1,
     title: "Rebuilding an E-Commerce Checkout: From 12s to 1.8s Load Time",
     slug: "ecommerce-checkout-rebuild-case-study",
     excerpt:
@@ -193,13 +195,14 @@ async function tenantMiddleware(req, res, next) {
 <h2>Results</h2>
 <p>Page load dropped from <strong>12 seconds to 1.8 seconds</strong>. Cart abandonment fell by 28%, translating to roughly $180K in recovered monthly revenue for the client.</p>`,
     tags: ["Case Study", "E-Commerce", "Performance"],
-    published: true,
+    status: "published",
     publishedAt: "2026-01-15T10:00:00Z",
     createdAt: "2026-01-15T10:00:00Z",
     updatedAt: "2026-01-15T10:00:00Z",
   },
   {
-    _id: "blog-cs-3",
+    id: 3,
+    userId: 1,
     title: "Building a Real-Time Health Monitoring Dashboard for 2,000 Guests",
     slug: "health-monitoring-dashboard-case-study",
     excerpt:
@@ -221,7 +224,7 @@ async function tenantMiddleware(req, res, next) {
 <li>Zero missed critical alerts since deployment</li>
 </ul>`,
     tags: ["Case Study", "Real-Time", "Healthcare"],
-    published: true,
+    status: "published",
     publishedAt: "2025-12-05T10:00:00Z",
     createdAt: "2025-12-05T10:00:00Z",
     updatedAt: "2025-12-05T10:00:00Z",
@@ -229,12 +232,13 @@ async function tenantMiddleware(req, res, next) {
 
   // ── Scaling & Performance ──
   {
-    _id: "blog-sp-1",
+    id: 4,
+    userId: 1,
     title: "Scaling Node.js APIs to Handle 10M Requests per Day",
     slug: "scaling-nodejs-apis-10m-requests",
     excerpt:
       "The patterns, caching strategies, and infrastructure decisions that took our API from struggling at 100K requests to comfortably handling 10M daily.",
-    category: "scaling",
+    category: "scaling-and-performance",
     content: `<h2>Where We Started</h2>
 <p>The API was a single Node.js process on a 2-core server. At 100K daily requests, response times were creeping past 2 seconds and the database was the bottleneck.</p>
 
@@ -255,18 +259,19 @@ async function tenantMiddleware(req, res, next) {
 <h2>Results</h2>
 <p>Average response time: <strong>45ms</strong>. P99 latency: <strong>180ms</strong>. Handles 10M+ requests daily with 40% infrastructure headroom.</p>`,
     tags: ["Scaling", "Node.js", "Performance"],
-    published: true,
+    status: "published",
     publishedAt: "2026-02-10T10:00:00Z",
     createdAt: "2026-02-10T10:00:00Z",
     updatedAt: "2026-02-10T10:00:00Z",
   },
   {
-    _id: "blog-sp-2",
+    id: 5,
+    userId: 1,
     title: "How I Reduced a Next.js App's Bundle Size by 65%",
     slug: "nextjs-bundle-size-optimization",
     excerpt:
       "A practical walkthrough of the tools and techniques I used to cut a Next.js production bundle from 1.2MB to 420KB — without removing features.",
-    category: "scaling",
+    category: "scaling-and-performance",
     content: `<h2>The Audit</h2>
 <p>Running <code>npx @next/bundle-analyzer</code> revealed the usual suspects: a full lodash import (71KB), moment.js (67KB), and an icon library shipping 3,000 icons when we used 12.</p>
 
@@ -283,18 +288,19 @@ async function tenantMiddleware(req, res, next) {
 <h2>Final Numbers</h2>
 <p>First Load JS went from <strong>1.2MB to 420KB</strong>. Lighthouse Performance score jumped from 62 to 94. Time to Interactive improved by 2.1 seconds on mobile.</p>`,
     tags: ["Performance", "Next.js", "Optimization"],
-    published: true,
+    status: "published",
     publishedAt: "2026-01-28T10:00:00Z",
     createdAt: "2026-01-28T10:00:00Z",
     updatedAt: "2026-01-28T10:00:00Z",
   },
   {
-    _id: "blog-sp-3",
+    id: 6,
+    userId: 1,
     title: "Database Query Optimization: From 8 Seconds to 50ms",
     slug: "database-query-optimization-guide",
     excerpt:
       "A slow dashboard query was crippling our app. Here's the step-by-step process of profiling, indexing, and restructuring it for a 160x speedup.",
-    category: "scaling",
+    category: "scaling-and-performance",
     content: `<h2>The Symptom</h2>
 <p>Users reported the analytics dashboard taking 8+ seconds to load. Server logs confirmed a single MongoDB aggregation pipeline was the culprit — scanning 2.4 million documents on every request.</p>
 
@@ -310,7 +316,7 @@ async function tenantMiddleware(req, res, next) {
 <h2>Result</h2>
 <p>Query time: <strong>8,000ms → 50ms</strong>. Dashboard loads instantly. Background job completes in 3 seconds and runs every 5 minutes.</p>`,
     tags: ["Database", "Performance", "MongoDB"],
-    published: true,
+    status: "published",
     publishedAt: "2025-12-20T10:00:00Z",
     createdAt: "2025-12-20T10:00:00Z",
     updatedAt: "2025-12-20T10:00:00Z",
@@ -318,12 +324,13 @@ async function tenantMiddleware(req, res, next) {
 
   // ── AI Integrations ──
   {
-    _id: "blog-ai-1",
+    id: 7,
+    userId: 1,
     title: "Adding GPT-Powered Search to a Product Catalog: A Practical Guide",
     slug: "gpt-powered-product-search",
     excerpt:
       "How I integrated OpenAI embeddings and vector search to build a natural-language product search that increased conversion rates by 23%.",
-    category: "ai",
+    category: "ai-integration",
     content: `<h2>Why Traditional Search Falls Short</h2>
 <p>Keyword-based search works for exact matches, but users don't always know the right terms. A query like "something to keep my coffee hot at my desk" should return travel mugs and heated coasters — but keyword search returns nothing.</p>
 
@@ -352,18 +359,19 @@ const results = await db.query(
 <li>Average search latency: 85ms (including embedding generation)</li>
 </ul>`,
     tags: ["AI", "OpenAI", "Search"],
-    published: true,
+    status: "published",
     publishedAt: "2026-03-01T10:00:00Z",
     createdAt: "2026-03-01T10:00:00Z",
     updatedAt: "2026-03-01T10:00:00Z",
   },
   {
-    _id: "blog-ai-2",
+    id: 8,
+    userId: 1,
     title: "Building an AI-Powered Content Moderation Pipeline",
     slug: "ai-content-moderation-pipeline",
     excerpt:
       "How we built a multi-stage AI moderation system that processes 50K user submissions daily with 99.2% accuracy and sub-second response times.",
-    category: "ai",
+    category: "ai-integration",
     content: `<h2>The Need</h2>
 <p>Our client's platform receives 50,000+ user-generated text submissions daily. Manual moderation was costing $12K/month and introducing 4-hour delays. They needed automated moderation that's fast, accurate, and explainable.</p>
 
@@ -386,18 +394,19 @@ const results = await db.query(
 <li>False positive rate: 0.3%</li>
 </ul>`,
     tags: ["AI", "Moderation", "Pipeline"],
-    published: true,
+    status: "published",
     publishedAt: "2026-02-05T10:00:00Z",
     createdAt: "2026-02-05T10:00:00Z",
     updatedAt: "2026-02-05T10:00:00Z",
   },
   {
-    _id: "blog-ai-3",
+    id: 9,
+    userId: 1,
     title: "Integrating AI Chat Assistants into Existing Web Apps",
     slug: "integrating-ai-chat-assistants",
     excerpt:
       "A step-by-step walkthrough of adding a context-aware AI chat assistant to an existing SaaS product using RAG, streaming, and conversation memory.",
-    category: "ai",
+    category: "ai-integration",
     content: `<h2>What We're Building</h2>
 <p>An AI assistant embedded in a SaaS dashboard that can answer questions about the user's data, explain features, and guide workflows — all within a chat interface. Think of it as a support agent that actually knows your product and the user's account.</p>
 
@@ -418,7 +427,7 @@ const results = await db.query(
 <li>Fallback to human support when confidence is low</li>
 </ul>`,
     tags: ["AI", "Chat", "RAG"],
-    published: true,
+    status: "published",
     publishedAt: "2026-01-10T10:00:00Z",
     createdAt: "2026-01-10T10:00:00Z",
     updatedAt: "2026-01-10T10:00:00Z",

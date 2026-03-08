@@ -5,6 +5,8 @@ import type {
   Skill,
   Project,
   Blog,
+  Pagination,
+  PaginatedBlogs,
 } from "./types";
 import {
   sampleProfile,
@@ -81,18 +83,38 @@ export async function getProjects(): Promise<Project[]> {
   }
 }
 
-export async function getPublishedBlogs(): Promise<Blog[]> {
+const defaultPagination: Pagination = {
+  currentPage: 1,
+  totalPages: 1,
+  totalItems: 0,
+  itemsPerPage: 10,
+};
+
+export async function getPublishedBlogs(page = 1): Promise<PaginatedBlogs> {
   try {
-    const data = await fetcher<Blog[]>("/api/blogs/published");
-    return data.length > 0 ? data : sampleBlogs;
+    const data = await fetcher<{
+      data: { blogs: Blog[] };
+      pagination: Pagination;
+    }>(`/api/blogs/published?page=${page}`);
+    const blogs = data?.data?.blogs;
+    const pagination = data?.pagination ?? defaultPagination;
+    return {
+      blogs: blogs?.length > 0 ? blogs : sampleBlogs,
+      pagination,
+    };
   } catch {
-    return sampleBlogs;
+    return {
+      blogs: sampleBlogs,
+      pagination: { ...defaultPagination, totalItems: sampleBlogs.length },
+    };
   }
 }
 
 export async function getBlogBySlug(slug: string): Promise<Blog | null> {
   try {
-    return await fetcher<Blog>(`/api/blogs/published/${slug}`, 1800);
+    const data = await fetcher<{ data: { blog: Blog } }>(`/api/blogs/published/${slug}`);
+    let blog = data?.data?.blog;
+    return blog ?? null;
   } catch {
     return sampleBlogs.find((b) => b.slug === slug) ?? null;
   }

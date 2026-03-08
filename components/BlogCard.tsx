@@ -7,8 +7,8 @@ import type { Blog, BlogCategory } from "@/lib/types";
 
 const categoryLabels: Record<BlogCategory, { text: string; color: string }> = {
   "case-study": { text: "Case Study", color: "bg-emerald-500/10 text-emerald-400" },
-  scaling: { text: "Scaling & Perf", color: "bg-amber-500/10 text-amber-400" },
-  ai: { text: "AI Integration", color: "bg-violet-500/10 text-violet-400" },
+  "scaling-and-performance": { text: "Scaling & Perf", color: "bg-amber-500/10 text-amber-400" },
+  "ai-integration": { text: "AI Integration", color: "bg-violet-500/10 text-violet-400" },
   general: { text: "General", color: "bg-zinc-500/10 text-zinc-400" },
 };
 
@@ -27,6 +27,7 @@ function formatDate(dateStr: string) {
 
 export function BlogCard({ blog, index = 0 }: BlogCardProps) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+  const dateStr = blog.publishedAt || blog.createdAt;
 
   return (
     <motion.div
@@ -53,12 +54,24 @@ export function BlogCard({ blog, index = 0 }: BlogCardProps) {
           )}
           <CardBody className="p-4 sm:p-6">
             <div className="flex items-center gap-2 sm:gap-3 mb-2 flex-wrap">
-              <p className="text-xs sm:text-sm text-zinc-500">
-                {formatDate(blog.publishedAt || blog.createdAt)}
-              </p>
+              {dateStr && (
+                <p className="text-xs sm:text-sm text-zinc-500">
+                  {formatDate(dateStr)}
+                </p>
+              )}
               {blog.category && categoryLabels[blog.category] && (
                 <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${categoryLabels[blog.category].color}`}>
                   {categoryLabels[blog.category].text}
+                </span>
+              )}
+              {blog.readTime && (
+                <span className="text-xs sm:text-sm text-zinc-500">
+                  {blog.readTime} min read
+                </span>
+              )}
+              {blog.status === "draft" && (
+                <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-yellow-500/10 text-yellow-400">
+                  Draft
                 </span>
               )}
             </div>

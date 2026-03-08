@@ -49,9 +49,11 @@ export function BlogPostContent({ blog }: BlogPostContentProps) {
         </Button>
 
         <header className="mb-10">
-          <p className="text-sm text-zinc-500 mb-4">
-            {formatDate(blog.publishedAt || blog.createdAt)}
-          </p>
+          {(blog.publishedAt || blog.createdAt) && (
+            <p className="text-sm text-zinc-500 mb-4">
+              {formatDate(blog.publishedAt || blog.createdAt)}
+            </p>
+          )}
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 sm:mb-6">
             {blog.title}
           </h1>

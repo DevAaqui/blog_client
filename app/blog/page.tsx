@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getPublishedBlogs } from "@/lib/api";
 import { BlogCategoryFilter } from "@/components/BlogCategoryFilter";
+import { BlogListSkeleton } from "@/components/BlogListSkeleton";
 
 export const dynamic = "force-dynamic";
 
@@ -10,8 +12,18 @@ export const metadata: Metadata = {
     "Case studies, scaling solutions, and AI integration guides from real-world projects.",
 };
 
-export default async function BlogPage() {
-  const blogs = await getPublishedBlogs();
+async function BlogContent({ page }: { page: number }) {
+  const { blogs, pagination } = await getPublishedBlogs(page);
+  return <BlogCategoryFilter blogs={blogs} pagination={pagination} />;
+}
+
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { page } = await searchParams;
+  const currentPage = Math.max(1, parseInt(page || "1", 10) || 1);
 
   return (
     <section className="py-8 sm:py-10 min-h-screen">
@@ -29,7 +41,9 @@ export default async function BlogPage() {
           </p>
         </div>
 
-        <BlogCategoryFilter blogs={blogs} />
+        <Suspense key={currentPage} fallback={<BlogListSkeleton />}>
+          <BlogContent page={currentPage} />
+        </Suspense>
       </div>
     </section>
   );

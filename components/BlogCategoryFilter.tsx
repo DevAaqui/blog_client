@@ -1,24 +1,28 @@
 "use client";
 
-import { Tabs, Tab } from "@heroui/react";
+import { Tabs, Tab, Button } from "@heroui/react";
 import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { BlogCard } from "./BlogCard";
 import { motion } from "framer-motion";
-import type { Blog, BlogCategory } from "@/lib/types";
+import type { Blog, BlogCategory, Pagination } from "@/lib/types";
 
 interface BlogCategoryFilterProps {
   blogs: Blog[];
+  pagination: Pagination;
 }
 
 const categories: { key: BlogCategory | "all"; label: string; description: string }[] = [
   { key: "all", label: "All Posts", description: "Everything I've written" },
   { key: "case-study", label: "Case Studies", description: "Real-world projects and their outcomes" },
-  { key: "scaling", label: "Scaling & Performance", description: "Making things faster, bigger, and more reliable" },
-  { key: "ai", label: "AI Integrations", description: "Building intelligent features with AI/ML" },
+  { key: "scaling-and-performance", label: "Scaling & Performance", description: "Making things faster, bigger, and more reliable" },
+  { key: "ai-integration", label: "AI Integrations", description: "Building intelligent features with AI/ML" },
 ];
 
-export function BlogCategoryFilter({ blogs }: BlogCategoryFilterProps) {
+export function BlogCategoryFilter({ blogs, pagination }: BlogCategoryFilterProps) {
   const [selected, setSelected] = useState<string>("all");
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   const filtered =
     selected === "all"
@@ -26,6 +30,13 @@ export function BlogCategoryFilter({ blogs }: BlogCategoryFilterProps) {
       : blogs.filter((b) => b.category === selected);
 
   const activeCategory = categories.find((c) => c.key === selected);
+  const { currentPage, totalPages } = pagination;
+
+  function goToPage(page: number) {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("page", String(page));
+    router.push(`/blog?${params.toString()}`);
+  }
 
   return (
     <div>
@@ -66,9 +77,49 @@ export function BlogCategoryFilter({ blogs }: BlogCategoryFilterProps) {
           className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {filtered.map((blog, i) => (
-            <BlogCard key={blog._id} blog={blog} index={i} />
+            <BlogCard key={blog.id} blog={blog} index={i} />
           ))}
         </motion.div>
+      )}
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 mt-12">
+          <Button
+            size="sm"
+            variant="flat"
+            isDisabled={currentPage <= 1}
+            onPress={() => goToPage(currentPage - 1)}
+            className="bg-zinc-800/80 text-zinc-300 disabled:opacity-40"
+          >
+            Previous
+          </Button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <Button
+              key={page}
+              size="sm"
+              variant="flat"
+              onPress={() => goToPage(page)}
+              className={
+                page === currentPage
+                  ? "bg-blue-500/20 text-blue-400 font-semibold"
+                  : "bg-zinc-800/80 text-zinc-400 hover:text-white"
+              }
+            >
+              {page}
+            </Button>
+          ))}
+
+          <Button
+            size="sm"
+            variant="flat"
+            isDisabled={currentPage >= totalPages}
+            onPress={() => goToPage(currentPage + 1)}
+            className="bg-zinc-800/80 text-zinc-300 disabled:opacity-40"
+          >
+            Next
+          </Button>
+        </div>
       )}
     </div>
   );

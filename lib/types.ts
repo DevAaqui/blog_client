@@ -63,19 +63,42 @@ export interface Project {
   updatedAt: string;
 }
 
-export type BlogCategory = "case-study" | "scaling" | "ai" | "general";
+export type BlogCategory = "case-study" | "scaling-and-performance" | "ai-integration" | "general";
+
+export type BlogStatus = "published" | "draft";
+
+export interface BlogAuthor {
+  id: number;
+  name: string;
+  avatar: string | null;
+}
 
 export interface Blog {
-  _id: string;
+  id: number;
+  userId: number;
   title: string;
   slug: string;
-  excerpt?: string;
   content: string;
+  excerpt?: string;
   coverImage?: string;
-  tags?: string[];
   category?: BlogCategory;
-  published: boolean;
+  tags?: string[];
+  status: BlogStatus;
   publishedAt?: string;
+  readTime?: number;
   createdAt: string;
   updatedAt: string;
+  author?: BlogAuthor;
+}
+
+export interface Pagination {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  itemsPerPage: number;
+}
+
+export interface PaginatedBlogs {
+  blogs: Blog[];
+  pagination: Pagination;
 }
