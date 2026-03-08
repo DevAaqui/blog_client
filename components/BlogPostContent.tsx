@@ -21,8 +21,8 @@ export function BlogPostContent({ blog }: BlogPostContentProps) {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
   return (
-    <article className="py-24 sm:py-32 min-h-screen">
-      <div className="max-w-3xl mx-auto px-6">
+    <article className="py-10 sm:py-10 min-h-screen">
+      <div className="max-w-7xl mx-auto px-0">
         <Button
           as={Link}
           href="/blog"

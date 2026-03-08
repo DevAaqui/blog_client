@@ -133,99 +133,294 @@ export const sampleProjects: Project[] = [
 ];
 
 export const sampleBlogs: Blog[] = [
+  // ── Case Studies ──
   {
-    _id: "blog-1",
-    title: "Building Scalable APIs with Node.js: Lessons from Production",
-    slug: "building-scalable-apis-nodejs",
+    _id: "blog-cs-1",
+    title: "How We Built a Multi-Tenant SaaS Platform Serving 5,000+ Users",
+    slug: "multi-tenant-saas-platform-case-study",
     excerpt:
-      "After building APIs that serve millions of requests, here are the patterns and practices that actually matter when it comes to Node.js at scale.",
-    content: `<h2>Why API Design Matters</h2>
-<p>When you're building APIs that need to handle real traffic, the decisions you make early on compound quickly. I've spent the last few years building and scaling Node.js APIs, and I want to share the patterns that have consistently worked.</p>
+      "A deep dive into architecting a multi-tenant SaaS product — from database isolation strategies to tenant-aware middleware and billing integration.",
+    category: "case-study",
+    content: `<h2>The Challenge</h2>
+<p>Our client needed a platform where each customer (tenant) gets their own isolated workspace — with shared infrastructure underneath to keep costs manageable. The target was 5,000 active users within 6 months of launch.</p>
 
-<h2>1. Structure Your Project for Growth</h2>
-<p>The single biggest mistake I see in Node.js projects is a flat file structure that becomes unmanageable after 20 files. Instead, organize by feature — not by type.</p>
+<h2>Architecture Decisions</h2>
+<p>We chose a <strong>shared database, separate schema</strong> approach. Each tenant gets their own set of tables within PostgreSQL, giving us data isolation without the operational overhead of separate database instances.</p>
 
-<pre><code>src/
-  modules/
-    users/
-      users.controller.ts
-      users.service.ts
-      users.routes.ts
-      users.validation.ts
-    orders/
-      orders.controller.ts
-      orders.service.ts
-      ...</code></pre>
+<pre><code>// Tenant-aware middleware
+async function tenantMiddleware(req, res, next) {
+  const tenantId = req.headers['x-tenant-id'];
+  req.db = await getTenantConnection(tenantId);
+  next();
+}</code></pre>
 
-<h2>2. Validate Everything at the Edge</h2>
-<p>Use a schema validation library like Zod or Joi at your API boundary. Never trust client input. This single practice prevents entire categories of bugs.</p>
-
-<h2>3. Embrace Async Patterns</h2>
-<p>Node.js shines with I/O-bound workloads. Use <code>Promise.all()</code> for independent operations, implement proper connection pooling for databases, and consider message queues for heavy processing.</p>
-
-<blockquote>The best API is one your consumers never have to think about — it just works, consistently and predictably.</blockquote>
-
-<h2>Key Takeaways</h2>
+<h2>Key Results</h2>
 <ul>
-<li>Structure projects by feature, not file type</li>
-<li>Validate all inputs at the API boundary</li>
-<li>Use connection pooling and caching strategically</li>
-<li>Monitor everything — latency, error rates, throughput</li>
-</ul>`,
-    tags: ["Node.js", "API Design", "Backend"],
-    published: true,
-    publishedAt: "2025-12-15T10:00:00Z",
-    createdAt: "2025-12-15T10:00:00Z",
-    updatedAt: "2025-12-15T10:00:00Z",
-  },
-  {
-    _id: "blog-2",
-    title: "Why I Switched from Create React App to Next.js (And Never Looked Back)",
-    slug: "why-i-switched-to-nextjs",
-    excerpt:
-      "After years of using CRA, switching to Next.js transformed how I build web apps. Here's what convinced me and what I wish I knew earlier.",
-    content: `<h2>The Tipping Point</h2>
-<p>I was a devoted Create React App user for years. It was simple, it worked, and I knew it inside out. But as my projects grew more complex — needing SEO, faster initial loads, and API routes — I kept fighting the framework instead of building features.</p>
-
-<h2>What Next.js Gets Right</h2>
-<p>The App Router in Next.js is a genuine paradigm shift. Server Components let you fetch data where it makes sense, streaming gives users instant feedback, and the file-based routing eliminates an entire category of boilerplate.</p>
-
-<h2>The Performance Difference</h2>
-<p>My portfolio site went from a 3.2s First Contentful Paint with CRA to 0.8s with Next.js — without any manual optimization. Server-side rendering and automatic code splitting do the heavy lifting.</p>
-
-<h2>When CRA Still Makes Sense</h2>
-<p>If you're building a purely client-side app behind authentication (like an admin dashboard), CRA or Vite are still great choices. Not everything needs SSR.</p>`,
-    tags: ["Next.js", "React", "Web Development"],
-    published: true,
-    publishedAt: "2025-11-28T10:00:00Z",
-    createdAt: "2025-11-28T10:00:00Z",
-    updatedAt: "2025-11-28T10:00:00Z",
-  },
-  {
-    _id: "blog-3",
-    title: "The Freelancer's Tech Stack: Tools That Actually Save Time",
-    slug: "freelancer-tech-stack-2025",
-    excerpt:
-      "After completing 30+ freelance projects, these are the tools and technologies that consistently help me deliver faster and keep clients happy.",
-    content: `<h2>Choosing the Right Stack</h2>
-<p>As a freelancer, your tech stack is your competitive advantage. You need tools that let you move fast, produce quality output, and adapt to different project requirements without starting from scratch every time.</p>
-
-<h2>My Go-To Stack</h2>
-<p>For most client projects, I reach for: <strong>Next.js</strong> (frontend + API), <strong>PostgreSQL</strong> (data), <strong>Tailwind CSS</strong> (styling), and <strong>Vercel</strong> (deployment). This combination covers 80% of freelance web projects.</p>
-
-<h2>Why This Works for Freelancing</h2>
-<ul>
-<li><strong>Speed</strong>: I can scaffold a full-stack app in under an hour</li>
-<li><strong>Quality</strong>: TypeScript catches bugs before clients see them</li>
-<li><strong>Deployment</strong>: Vercel's preview deployments let clients review changes instantly</li>
-<li><strong>Maintenance</strong>: A consistent stack means easy handoffs and long-term support</li>
+<li>Onboarded 5,200 users in the first 4 months</li>
+<li>99.97% uptime over 12 months</li>
+<li>Average API response time under 120ms</li>
+<li>Infrastructure cost 60% lower than per-tenant deployment</li>
 </ul>
 
-<blockquote>The best tech stack is the one that lets you focus on solving the client's problem, not fighting your tools.</blockquote>`,
-    tags: ["Freelancing", "Tech Stack", "Productivity"],
+<blockquote>Multi-tenancy isn't just a database decision — it touches auth, billing, caching, and even your error monitoring strategy.</blockquote>`,
+    tags: ["Case Study", "SaaS", "Architecture"],
     published: true,
-    publishedAt: "2025-10-10T10:00:00Z",
-    createdAt: "2025-10-10T10:00:00Z",
-    updatedAt: "2025-10-10T10:00:00Z",
+    publishedAt: "2026-02-20T10:00:00Z",
+    createdAt: "2026-02-20T10:00:00Z",
+    updatedAt: "2026-02-20T10:00:00Z",
+  },
+  {
+    _id: "blog-cs-2",
+    title: "Rebuilding an E-Commerce Checkout: From 12s to 1.8s Load Time",
+    slug: "ecommerce-checkout-rebuild-case-study",
+    excerpt:
+      "A client's checkout page was losing 40% of users to abandonment. Here's how we rebuilt it from scratch and recovered $180K in monthly revenue.",
+    category: "case-study",
+    content: `<h2>The Problem</h2>
+<p>The existing checkout was a monolithic React page that loaded everything upfront — payment SDKs, address validation, shipping calculators — all before the user could even see the form. Analytics showed a 40% drop-off rate.</p>
+
+<h2>Our Approach</h2>
+<p>We broke the checkout into a <strong>multi-step wizard</strong> with lazy-loaded stages. Payment SDK only loads when the user reaches the payment step. Address validation runs server-side via an API route.</p>
+
+<h2>Technical Highlights</h2>
+<ul>
+<li>React Server Components for the initial checkout shell (zero client JS)</li>
+<li>Streaming SSR so users see the first step instantly</li>
+<li>Edge-cached shipping rate calculations via Vercel Edge Functions</li>
+<li>Optimistic UI updates for cart modifications</li>
+</ul>
+
+<h2>Results</h2>
+<p>Page load dropped from <strong>12 seconds to 1.8 seconds</strong>. Cart abandonment fell by 28%, translating to roughly $180K in recovered monthly revenue for the client.</p>`,
+    tags: ["Case Study", "E-Commerce", "Performance"],
+    published: true,
+    publishedAt: "2026-01-15T10:00:00Z",
+    createdAt: "2026-01-15T10:00:00Z",
+    updatedAt: "2026-01-15T10:00:00Z",
+  },
+  {
+    _id: "blog-cs-3",
+    title: "Building a Real-Time Health Monitoring Dashboard for 2,000 Guests",
+    slug: "health-monitoring-dashboard-case-study",
+    excerpt:
+      "How we designed a real-time monitoring system with auto-refresh, severity-based alerts, and color-coded health scores for a hospitality platform.",
+    category: "case-study",
+    content: `<h2>The Brief</h2>
+<p>A hospitality client needed a centralized dashboard to monitor guest health metrics in real-time — tracking vitals, flagging at-risk guests, and alerting staff instantly when thresholds were breached.</p>
+
+<h2>System Design</h2>
+<p>We built a <strong>centralized auto-refresh system using Redux</strong> with page-specific refresh callbacks and pause/resume controls. Health scores are computed in real-time with threshold-based categorization.</p>
+
+<h2>Alert System</h2>
+<p>The notification engine supports multiple severity levels, 3 status states, team assignment tracking, and multi-recipient delivery. Staff see color-coded indicators for instant prioritization.</p>
+
+<h2>Outcome</h2>
+<ul>
+<li>Monitoring 2,000+ guests simultaneously</li>
+<li>Alert response time reduced from 15 minutes to under 45 seconds</li>
+<li>Zero missed critical alerts since deployment</li>
+</ul>`,
+    tags: ["Case Study", "Real-Time", "Healthcare"],
+    published: true,
+    publishedAt: "2025-12-05T10:00:00Z",
+    createdAt: "2025-12-05T10:00:00Z",
+    updatedAt: "2025-12-05T10:00:00Z",
+  },
+
+  // ── Scaling & Performance ──
+  {
+    _id: "blog-sp-1",
+    title: "Scaling Node.js APIs to Handle 10M Requests per Day",
+    slug: "scaling-nodejs-apis-10m-requests",
+    excerpt:
+      "The patterns, caching strategies, and infrastructure decisions that took our API from struggling at 100K requests to comfortably handling 10M daily.",
+    category: "scaling",
+    content: `<h2>Where We Started</h2>
+<p>The API was a single Node.js process on a 2-core server. At 100K daily requests, response times were creeping past 2 seconds and the database was the bottleneck.</p>
+
+<h2>Layer 1: Database Optimization</h2>
+<p>We added composite indexes on our most-queried fields, introduced connection pooling with <code>pgBouncer</code>, and moved read-heavy queries to a read replica.</p>
+
+<h2>Layer 2: Caching Strategy</h2>
+<p>A three-tier caching approach:</p>
+<ul>
+<li><strong>Edge cache</strong> (CDN) for static API responses — 60-second TTL</li>
+<li><strong>Redis</strong> for session data and computed aggregations — 5-minute TTL</li>
+<li><strong>In-memory LRU</strong> for hot configuration data — 30-second TTL</li>
+</ul>
+
+<h2>Layer 3: Horizontal Scaling</h2>
+<p>We containerized the app with Docker, deployed behind an ALB on AWS ECS, and set up auto-scaling based on CPU and request count metrics. The app now runs 4–12 containers depending on load.</p>
+
+<h2>Results</h2>
+<p>Average response time: <strong>45ms</strong>. P99 latency: <strong>180ms</strong>. Handles 10M+ requests daily with 40% infrastructure headroom.</p>`,
+    tags: ["Scaling", "Node.js", "Performance"],
+    published: true,
+    publishedAt: "2026-02-10T10:00:00Z",
+    createdAt: "2026-02-10T10:00:00Z",
+    updatedAt: "2026-02-10T10:00:00Z",
+  },
+  {
+    _id: "blog-sp-2",
+    title: "How I Reduced a Next.js App's Bundle Size by 65%",
+    slug: "nextjs-bundle-size-optimization",
+    excerpt:
+      "A practical walkthrough of the tools and techniques I used to cut a Next.js production bundle from 1.2MB to 420KB — without removing features.",
+    category: "scaling",
+    content: `<h2>The Audit</h2>
+<p>Running <code>npx @next/bundle-analyzer</code> revealed the usual suspects: a full lodash import (71KB), moment.js (67KB), and an icon library shipping 3,000 icons when we used 12.</p>
+
+<h2>Quick Wins</h2>
+<ul>
+<li>Replaced <code>lodash</code> with <code>lodash-es</code> tree-shakeable imports — saved 58KB</li>
+<li>Swapped <code>moment.js</code> for <code>dayjs</code> — saved 62KB</li>
+<li>Used <code>@iconify/react</code> with on-demand loading instead of the full icon pack — saved 89KB</li>
+</ul>
+
+<h2>Deeper Optimizations</h2>
+<p>Dynamic imports for below-the-fold components, moving heavy charting libraries to client-only lazy loads, and enabling Next.js <code>optimizePackageImports</code> for HeroUI and Framer Motion.</p>
+
+<h2>Final Numbers</h2>
+<p>First Load JS went from <strong>1.2MB to 420KB</strong>. Lighthouse Performance score jumped from 62 to 94. Time to Interactive improved by 2.1 seconds on mobile.</p>`,
+    tags: ["Performance", "Next.js", "Optimization"],
+    published: true,
+    publishedAt: "2026-01-28T10:00:00Z",
+    createdAt: "2026-01-28T10:00:00Z",
+    updatedAt: "2026-01-28T10:00:00Z",
+  },
+  {
+    _id: "blog-sp-3",
+    title: "Database Query Optimization: From 8 Seconds to 50ms",
+    slug: "database-query-optimization-guide",
+    excerpt:
+      "A slow dashboard query was crippling our app. Here's the step-by-step process of profiling, indexing, and restructuring it for a 160x speedup.",
+    category: "scaling",
+    content: `<h2>The Symptom</h2>
+<p>Users reported the analytics dashboard taking 8+ seconds to load. Server logs confirmed a single MongoDB aggregation pipeline was the culprit — scanning 2.4 million documents on every request.</p>
+
+<h2>Step 1: Profile</h2>
+<p>Using <code>explain("executionStats")</code>, we found the pipeline was doing a full collection scan (COLLSCAN) followed by three $lookup stages with no indexes on the foreign keys.</p>
+
+<h2>Step 2: Index Strategically</h2>
+<p>We added compound indexes matching our most common query patterns and ensured $lookup foreign fields were indexed. This alone brought the query from 8s to 800ms.</p>
+
+<h2>Step 3: Pre-Aggregate</h2>
+<p>For the final 16x improvement, we introduced a materialized view pattern — a background job runs every 5 minutes, computing aggregated stats and storing them in a summary collection. The dashboard now reads from this pre-computed collection.</p>
+
+<h2>Result</h2>
+<p>Query time: <strong>8,000ms → 50ms</strong>. Dashboard loads instantly. Background job completes in 3 seconds and runs every 5 minutes.</p>`,
+    tags: ["Database", "Performance", "MongoDB"],
+    published: true,
+    publishedAt: "2025-12-20T10:00:00Z",
+    createdAt: "2025-12-20T10:00:00Z",
+    updatedAt: "2025-12-20T10:00:00Z",
+  },
+
+  // ── AI Integrations ──
+  {
+    _id: "blog-ai-1",
+    title: "Adding GPT-Powered Search to a Product Catalog: A Practical Guide",
+    slug: "gpt-powered-product-search",
+    excerpt:
+      "How I integrated OpenAI embeddings and vector search to build a natural-language product search that increased conversion rates by 23%.",
+    category: "ai",
+    content: `<h2>Why Traditional Search Falls Short</h2>
+<p>Keyword-based search works for exact matches, but users don't always know the right terms. A query like "something to keep my coffee hot at my desk" should return travel mugs and heated coasters — but keyword search returns nothing.</p>
+
+<h2>The Architecture</h2>
+<p>We generate <strong>OpenAI embeddings</strong> for every product (title + description + tags) and store them in a PostgreSQL table with the <code>pgvector</code> extension. At query time, we embed the user's search query and find the nearest neighbors.</p>
+
+<pre><code>// Generate embedding for search query
+const queryEmbedding = await openai.embeddings.create({
+  model: "text-embedding-3-small",
+  input: userQuery,
+});
+
+// Vector similarity search
+const results = await db.query(
+  'SELECT * FROM products ORDER BY embedding <=> $1 LIMIT 20',
+  [queryEmbedding.data[0].embedding]
+);</code></pre>
+
+<h2>Hybrid Approach</h2>
+<p>We combine vector results with traditional full-text search using a weighted scoring function. Exact keyword matches still rank highest, but semantically similar products fill the gaps.</p>
+
+<h2>Results</h2>
+<ul>
+<li>Search-to-purchase conversion increased 23%</li>
+<li>"No results" pages decreased by 71%</li>
+<li>Average search latency: 85ms (including embedding generation)</li>
+</ul>`,
+    tags: ["AI", "OpenAI", "Search"],
+    published: true,
+    publishedAt: "2026-03-01T10:00:00Z",
+    createdAt: "2026-03-01T10:00:00Z",
+    updatedAt: "2026-03-01T10:00:00Z",
+  },
+  {
+    _id: "blog-ai-2",
+    title: "Building an AI-Powered Content Moderation Pipeline",
+    slug: "ai-content-moderation-pipeline",
+    excerpt:
+      "How we built a multi-stage AI moderation system that processes 50K user submissions daily with 99.2% accuracy and sub-second response times.",
+    category: "ai",
+    content: `<h2>The Need</h2>
+<p>Our client's platform receives 50,000+ user-generated text submissions daily. Manual moderation was costing $12K/month and introducing 4-hour delays. They needed automated moderation that's fast, accurate, and explainable.</p>
+
+<h2>Multi-Stage Pipeline</h2>
+<p>We designed a three-stage pipeline:</p>
+<ol>
+<li><strong>Rule-based pre-filter</strong> — catches obvious violations (blocked words, spam patterns) in under 5ms</li>
+<li><strong>OpenAI Moderation API</strong> — classifies content across 7 categories (hate, violence, self-harm, etc.)</li>
+<li><strong>Custom GPT-4o-mini classifier</strong> — handles edge cases and context-dependent decisions with structured JSON output</li>
+</ol>
+
+<h2>The Escalation Layer</h2>
+<p>Content flagged with low confidence (60-80% probability) goes to a human review queue. The reviewer's decision feeds back into our prompt engineering, continuously improving accuracy.</p>
+
+<h2>Impact</h2>
+<ul>
+<li>99.2% accuracy (up from 87% with rules alone)</li>
+<li>Moderation cost reduced from $12K to $800/month</li>
+<li>Average processing time: 340ms per submission</li>
+<li>False positive rate: 0.3%</li>
+</ul>`,
+    tags: ["AI", "Moderation", "Pipeline"],
+    published: true,
+    publishedAt: "2026-02-05T10:00:00Z",
+    createdAt: "2026-02-05T10:00:00Z",
+    updatedAt: "2026-02-05T10:00:00Z",
+  },
+  {
+    _id: "blog-ai-3",
+    title: "Integrating AI Chat Assistants into Existing Web Apps",
+    slug: "integrating-ai-chat-assistants",
+    excerpt:
+      "A step-by-step walkthrough of adding a context-aware AI chat assistant to an existing SaaS product using RAG, streaming, and conversation memory.",
+    category: "ai",
+    content: `<h2>What We're Building</h2>
+<p>An AI assistant embedded in a SaaS dashboard that can answer questions about the user's data, explain features, and guide workflows — all within a chat interface. Think of it as a support agent that actually knows your product and the user's account.</p>
+
+<h2>RAG Architecture</h2>
+<p>We use <strong>Retrieval-Augmented Generation</strong> to ground the AI in real data. The user's question is embedded, matched against their account data and our docs, and the relevant context is injected into the system prompt before calling GPT-4o.</p>
+
+<h2>Streaming Responses</h2>
+<p>Nobody wants to wait 5 seconds staring at a blank chat bubble. We stream responses using Server-Sent Events, rendering tokens as they arrive. The perceived response time drops from seconds to milliseconds.</p>
+
+<h2>Conversation Memory</h2>
+<p>Each conversation is stored with a sliding window of the last 10 messages. This gives the AI context without blowing up token costs. For longer conversations, we summarize older messages into a single context block.</p>
+
+<h2>Key Learnings</h2>
+<ul>
+<li>Prompt engineering is 80% of the work — model selection is secondary</li>
+<li>Always show the AI's sources so users can verify answers</li>
+<li>Rate limiting per user is essential — AI APIs are expensive at scale</li>
+<li>Fallback to human support when confidence is low</li>
+</ul>`,
+    tags: ["AI", "Chat", "RAG"],
+    published: true,
+    publishedAt: "2026-01-10T10:00:00Z",
+    createdAt: "2026-01-10T10:00:00Z",
+    updatedAt: "2026-01-10T10:00:00Z",
   },
 ];

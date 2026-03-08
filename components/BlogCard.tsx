@@ -3,7 +3,14 @@
 import { Card, CardBody, Chip, Link } from "@heroui/react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import type { Blog } from "@/lib/types";
+import type { Blog, BlogCategory } from "@/lib/types";
+
+const categoryLabels: Record<BlogCategory, { text: string; color: string }> = {
+  "case-study": { text: "Case Study", color: "bg-emerald-500/10 text-emerald-400" },
+  scaling: { text: "Scaling & Perf", color: "bg-amber-500/10 text-amber-400" },
+  ai: { text: "AI Integration", color: "bg-violet-500/10 text-violet-400" },
+  general: { text: "General", color: "bg-zinc-500/10 text-zinc-400" },
+};
 
 interface BlogCardProps {
   blog: Blog;
@@ -45,9 +52,16 @@ export function BlogCard({ blog, index = 0 }: BlogCardProps) {
             </div>
           )}
           <CardBody className="p-6">
-            <p className="text-sm text-zinc-500 mb-2">
-              {formatDate(blog.publishedAt || blog.createdAt)}
-            </p>
+            <div className="flex items-center gap-3 mb-2">
+              <p className="text-sm text-zinc-500">
+                {formatDate(blog.publishedAt || blog.createdAt)}
+              </p>
+              {blog.category && categoryLabels[blog.category] && (
+                <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${categoryLabels[blog.category].color}`}>
+                  {categoryLabels[blog.category].text}
+                </span>
+              )}
+            </div>
             <h3 className="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors mb-2 line-clamp-2">
               {blog.title}
             </h3>

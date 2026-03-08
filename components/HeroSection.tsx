@@ -21,7 +21,7 @@ export function HeroSection() {
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm text-zinc-400 mb-8">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            Available for freelance work
+            Available
           </div>
         </motion.div>
 

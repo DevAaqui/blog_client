@@ -66,6 +66,8 @@ export interface Project {
   updatedAt: string;
 }
 
+export type BlogCategory = "case-study" | "scaling" | "ai" | "general";
+
 export interface Blog {
   _id: string;
   title: string;
@@ -74,6 +76,7 @@ export interface Blog {
   content: string;
   coverImage?: string;
   tags?: string[];
+  category?: BlogCategory;
   published: boolean;
   publishedAt?: string;
   createdAt: string;
