@@ -83,39 +83,51 @@ export function BlogCategoryFilter({ blogs, pagination }: BlogCategoryFilterProp
       )}
 
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 mt-12">
+        <div className="flex items-center justify-center gap-3 mt-16 mb-4">
           <Button
             size="sm"
-            variant="flat"
+            variant="bordered"
+            radius="full"
             isDisabled={currentPage <= 1}
             onPress={() => goToPage(currentPage - 1)}
-            className="bg-zinc-800/80 text-zinc-300 disabled:opacity-40"
+            className="border-zinc-700/60 text-zinc-400 hover:bg-zinc-800 hover:text-white disabled:opacity-30 disabled:hover:bg-transparent min-w-[100px]"
+            startContent={
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+            }
           >
             Previous
           </Button>
 
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <Button
-              key={page}
-              size="sm"
-              variant="flat"
-              onPress={() => goToPage(page)}
-              className={
-                page === currentPage
-                  ? "bg-blue-500/20 text-blue-400 font-semibold"
-                  : "bg-zinc-800/80 text-zinc-400 hover:text-white"
-              }
-            >
-              {page}
-            </Button>
-          ))}
+          <div className="flex items-center gap-1.5">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => goToPage(page)}
+                className={`w-9 h-9 rounded-full text-sm font-medium transition-all duration-200 ${
+                  page === currentPage
+                    ? "bg-blue-500 text-white shadow-lg shadow-blue-500/25"
+                    : "text-zinc-500 hover:bg-zinc-800 hover:text-white"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
 
           <Button
             size="sm"
-            variant="flat"
+            variant="bordered"
+            radius="full"
             isDisabled={currentPage >= totalPages}
             onPress={() => goToPage(currentPage + 1)}
-            className="bg-zinc-800/80 text-zinc-300 disabled:opacity-40"
+            className="border-zinc-700/60 text-zinc-400 hover:bg-zinc-800 hover:text-white disabled:opacity-30 disabled:hover:bg-transparent min-w-[100px]"
+            endContent={
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            }
           >
             Next
           </Button>
