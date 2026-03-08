@@ -10,13 +10,10 @@ export interface Profile {
   website?: string;
   avatar?: string;
   resumeUrl?: string;
-  socialLinks?: {
-    github?: string;
-    linkedin?: string;
-    twitter?: string;
-    youtube?: string;
-    [key: string]: string | undefined;
-  };
+  github?: string;
+  linkedin?: string;
+  twitter?: string;
+  youtube?: string;
 }
 
 export interface Experience {

@@ -17,7 +17,7 @@ function formatDate(dateStr: string) {
 
 export function ExperienceSection({ experiences }: ExperienceSectionProps) {
   const sorted = [...experiences].sort(
-    (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+    (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime(),
   );
 
   return (
@@ -61,21 +61,34 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                         <h3 className="text-lg font-semibold text-white">
                           {exp.position}
                         </h3>
-                        <p className="text-blue-400 font-medium">
+                        {/* <p className="text-blue-400 font-medium">
                           {exp.company}
-                        </p>
+                        </p> */}
                       </div>
-                      <span className="text-sm text-zinc-500 whitespace-nowrap">
+                      {/* <span className="text-sm text-zinc-500 whitespace-nowrap">
                         {formatDate(exp.startDate)} —{" "}
-                        {exp.current ? "Present" : exp.endDate ? formatDate(exp.endDate) : ""}
-                      </span>
+                        {exp.current
+                          ? "Present"
+                          : exp.endDate
+                            ? formatDate(exp.endDate)
+                            : "Present"}
+                      </span> */}
                     </div>
 
-                    {exp.location && (
-                      <p className="text-sm text-zinc-500 mb-3">{exp.location}</p>
-                    )}
-
-                    <p className="text-zinc-400 leading-relaxed">{exp.description}</p>
+                    {/* {exp.location && (
+                      <p className="text-sm text-zinc-500 mb-3">
+                        {exp.location}
+                      </p>
+                    )} */}
+                    <ul className="list-disc pl-5 space-y-1 text-zinc-400">
+                      {JSON.parse(exp?.description).map(
+                        (item: string, i: number) => (
+                          <li key={i}>{item}</li>
+                        ),
+                      )}
+                    </ul>
+                    {/* 
+                    <p className="text-zinc-400 leading-relaxed">{exp.description}</p> */}
 
                     {exp.technologies && exp.technologies.length > 0 && (
                       <div className="flex flex-wrap gap-2 mt-4">
