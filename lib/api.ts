@@ -18,7 +18,7 @@ import {
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-async function fetcher<T>(endpoint: string, revalidate = 0): Promise<T> {
+async function fetcher<T>(endpoint: string, revalidate = 3600): Promise<T> {
   const res = await fetch(`${API_URL}${endpoint}`, {
     next: { revalidate },
   });

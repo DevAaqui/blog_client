@@ -4,12 +4,28 @@ import { getPublishedBlogs } from "@/lib/api";
 import { BlogCategoryFilter } from "@/components/BlogCategoryFilter";
 import { BlogListSkeleton } from "@/components/BlogListSkeleton";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Blog — Aaquib",
+  title: "Blog",
   description:
     "Case studies, scaling solutions, and AI integration guides from real-world projects.",
+  openGraph: {
+    title: "Blog — Aaquib",
+    description:
+      "Case studies, scaling solutions, and AI integration guides from real-world projects.",
+    url: "https://buildwithaaquib.in/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog — Aaquib",
+    description:
+      "Case studies, scaling solutions, and AI integration guides from real-world projects.",
+  },
+  alternates: {
+    canonical: "https://buildwithaaquib.in/blog",
+  },
 };
 
 async function BlogContent({ page }: { page: number }) {

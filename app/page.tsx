@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { HeroSection } from "@/components/HeroSection";
 import { AboutSection } from "@/components/AboutSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
@@ -13,7 +14,29 @@ import {
   getPublishedBlogs,
 } from "@/lib/api";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
+
+export const metadata: Metadata = {
+  title: "Aaquib — Full-Stack Developer & Freelancer",
+  description:
+    "Expert full-stack developer specializing in building scalable web applications, APIs, and digital products. Available for freelance projects.",
+  openGraph: {
+    title: "Aaquib — Full-Stack Developer & Freelancer",
+    description:
+      "Expert full-stack developer specializing in building scalable web applications, APIs, and digital products. Available for freelance projects.",
+    url: "https://buildwithaaquib.in",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aaquib — Full-Stack Developer & Freelancer",
+    description:
+      "Expert full-stack developer specializing in building scalable web applications, APIs, and digital products.",
+  },
+  alternates: {
+    canonical: "https://buildwithaaquib.in",
+  },
+};
 
 export default async function HomePage() {
   const [profile, experiences, skills, projects, blogData] = await Promise.all([
