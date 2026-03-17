@@ -4,18 +4,11 @@ import { getBlogBySlug, getPublishedBlogs } from "@/lib/api";
 import { BlogPostContent } from "@/components/BlogPostContent";
 
 export const revalidate = 3600;
+// Render on demand so the build doesn't wait on the API (avoids 60s timeouts)
+export const dynamic = "force-dynamic";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  try {
-    const { blogs } = await getPublishedBlogs();
-    return blogs.map((blog) => ({ slug: blog.slug }));
-  } catch {
-    return [];
-  }
 }
 
 export async function generateMetadata({
