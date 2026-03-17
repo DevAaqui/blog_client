@@ -14,6 +14,7 @@ export interface Profile {
   linkedin?: string;
   twitter?: string;
   youtube?: string;
+  socialLinks?: Record<string, string>;
 }
 
 export interface Experience {

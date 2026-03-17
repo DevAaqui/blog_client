@@ -81,11 +81,19 @@ export function ExperienceSection({ experiences }: ExperienceSectionProps) {
                       </p>
                     )} */}
                     <ul className="list-disc pl-5 space-y-1 text-zinc-400">
-                      {JSON.parse(exp?.description).map(
-                        (item: string, i: number) => (
-                          <li key={i}>{item}</li>
-                        ),
-                      )}
+                      {(() => {
+                        try {
+                          const parsed = JSON.parse(exp.description);
+                          if (Array.isArray(parsed)) {
+                            return parsed.map((item: string, i: number) => (
+                              <li key={i}>{item}</li>
+                            ));
+                          }
+                        } catch {
+                          // not JSON
+                        }
+                        return <li>{exp.description}</li>;
+                      })()}
                     </ul>
                     {/* 
                     <p className="text-zinc-400 leading-relaxed">{exp.description}</p> */}
