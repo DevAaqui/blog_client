@@ -15,6 +15,7 @@ import {
 } from "@/lib/api";
 
 export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Aaquib — Full-Stack Developer & Freelancer",
